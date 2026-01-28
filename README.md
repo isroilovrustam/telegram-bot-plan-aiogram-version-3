@@ -176,6 +176,6 @@ class IsAdmin(BaseFilter):
 
 MIT
 
-## 👤 Muallif
+## 👤 Muallif [Telegram](https://t.me/abruisdev)
 
-Telegram bot shabloni aiogram 3.x uchun moslashtirildi.
+Telegram bot shabloni aiogram 3.x uchun.
