@@ -172,9 +172,6 @@ class IsAdmin(BaseFilter):
 - [Aiogram GitHub](https://github.com/aiogram/aiogram)
 - [Telegram Bot API](https://core.telegram.org/bots/api)
 
-## 📝 Litsenziya
-
-MIT
 
 ## 👤 Muallif [Telegram](https://t.me/abruisdev)
 
