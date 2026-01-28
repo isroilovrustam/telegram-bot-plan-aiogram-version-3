@@ -104,7 +104,7 @@ telegram-bot/
         └── throttling.py
 ```
 
-## 🔧 Aiogram 2.x dan 3.x ga o'tish farqlari
+## 🔧 Aiogram 3.x
 
 ### 1. Bot va Dispatcher yaratish
 
