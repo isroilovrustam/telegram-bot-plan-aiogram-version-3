@@ -108,16 +108,6 @@ telegram-bot/
 
 ### 1. Bot va Dispatcher yaratish
 
-**Eski (2.x):**
-```python
-from aiogram import Bot, Dispatcher, types
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-
-bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML)
-dp = Dispatcher(bot, storage=MemoryStorage())
-```
-
-**Yangi (3.x):**
 ```python
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
@@ -133,17 +123,6 @@ dp = Dispatcher(storage=MemoryStorage())
 
 ### 2. Handlerlar
 
-**Eski (2.x):**
-```python
-from aiogram import types
-from aiogram.dispatcher.filters.builtin import CommandStart
-
-@dp.message_handler(CommandStart())
-async def start(message: types.Message):
-    await message.answer("Salom!")
-```
-
-**Yangi (3.x):**
 ```python
 from aiogram import Router
 from aiogram.filters import CommandStart
@@ -158,13 +137,6 @@ async def start(message: Message):
 
 ### 3. Botni ishga tushirish
 
-**Eski (2.x):**
-```python
-from aiogram import executor
-executor.start_polling(dp, on_startup=on_startup)
-```
-
-**Yangi (3.x):**
 ```python
 import asyncio
 
@@ -176,16 +148,6 @@ asyncio.run(main())
 
 ### 4. Middlewarelar
 
-**Eski (2.x):**
-```python
-from aiogram.dispatcher.middlewares import BaseMiddleware
-
-class MyMiddleware(BaseMiddleware):
-    async def on_process_message(self, message, data):
-        pass
-```
-
-**Yangi (3.x):**
 ```python
 from aiogram import BaseMiddleware
 
@@ -196,16 +158,6 @@ class MyMiddleware(BaseMiddleware):
 
 ### 5. Filterlar
 
-**Eski (2.x):**
-```python
-from aiogram.dispatcher.filters import BoundFilter
-
-class IsAdmin(BoundFilter):
-    async def check(self, message):
-        return message.from_user.id in ADMINS
-```
-
-**Yangi (3.x):**
 ```python
 from aiogram.filters import BaseFilter
 
