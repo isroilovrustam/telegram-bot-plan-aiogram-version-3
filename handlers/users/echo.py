@@ -1,12 +1,12 @@
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-
+from filters.is_private import IsPrivate
 router = Router(name="echo")
 
 
 # Echo bot - barcha xabarlarga javob beradi (state bo'lmaganda)
-@router.message(F.text)
+@router.message(IsPrivate(), F.text)
 async def bot_echo(message: Message, state: FSMContext):
     """
     Echo handler - foydalanuvchi xabarini qaytaradi
