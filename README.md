@@ -235,7 +235,7 @@ dp.message.middleware(ThrottlingMiddleware(limit=1.0))  # 1 soniya
 ## 📞 Aloqa
 
 Savollar bo'lsa, murojaat qiling:
-- Telegram: [@your_username](https://t.me/your_username)
+- Telegram: [Abruisdev](https://t.me/abruisdev)
 
 ---
 
