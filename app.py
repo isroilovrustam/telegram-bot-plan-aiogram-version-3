@@ -13,9 +13,23 @@ from middlewares import setup_middlewares
 from utils.notify_admins import on_startup_notify
 from utils.set_bot_commands import set_default_commands
 
+# ┌──────────────────────────────────────────────────────────┐
+# │  🆕 Database ni import qilish                            │
+# └──────────────────────────────────────────────────────────┘
+from utils.db_api import db
+
 
 async def on_startup(bot: Bot):
     """Bot ishga tushganda bajariladigan funksiya"""
+
+    # ┌──────────────────────────────────────────────────────┐
+    # │  🆕 1. Bazaga ulanish (main.db faylini ochish)       │
+    # │     2. Jadvallarni yaratish (agar mavjud bo'lmasa)   │
+    # │  Bu ikki qator BOT ISHGA TUSHGANDA birinchi ishlaydi │
+    # └──────────────────────────────────────────────────────┘
+    await db.create()
+    await db.create_tables()
+
     # Birlamchi komandalar (/start va /help)
     await set_default_commands(bot)
 
@@ -27,6 +41,12 @@ async def on_startup(bot: Bot):
 
 async def on_shutdown(bot: Bot):
     """Bot to'xtaganda bajariladigan funksiya"""
+
+    # ┌──────────────────────────────────────────────────────┐
+    # │  🆕 Bazani yopish (ma'lumot yo'qolmasligi uchun)     │
+    # └──────────────────────────────────────────────────────┘
+    await db.close()
+
     logging.info("Bot to'xtatildi!")
     await bot.session.close()
 
