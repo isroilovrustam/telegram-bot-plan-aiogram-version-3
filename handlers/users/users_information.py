@@ -1,11 +1,13 @@
 from aiogram import Router, F
 from aiogram.types import Message
+
+from filters import IsAdminFilter
 from utils.db_api import db
 
 router = Router(name="users_info")
 
 
-@router.message(F.text == "/users_count")
+@router.message(F.text == "/users_count", IsAdminFilter())
 async def users_count(message: Message):
     try:
         users = await db.count_users()
@@ -13,7 +15,7 @@ async def users_count(message: Message):
     except Exception as e:
         await message.answer("Xatolik yuz berdi. Bazada muammo bo'lishi mumkin.")
 
-@router.message(F.text == "/all_profiles")
+@router.message(F.text == "/all_profiles", IsAdminFilter())
 async def view_all_profiles(message: Message):
     users = await db.get_all_users()
 

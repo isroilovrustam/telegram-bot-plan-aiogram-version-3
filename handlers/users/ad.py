@@ -2,12 +2,14 @@ import asyncio
 from aiogram import Router, F
 from aiogram.exceptions import TelegramRetryAfter, TelegramForbiddenError
 from aiogram.types import Message
+
+from filters import IsAdminFilter
 from utils.db_api import db
 
 router = Router(name="ad")
 
 
-@router.message(F.text == "/send_ad")
+@router.message(F.text == "/send_ad", IsAdminFilter())
 async def send_ad_to_all_users(message: Message):
     users = await db.get_all_users()
 
