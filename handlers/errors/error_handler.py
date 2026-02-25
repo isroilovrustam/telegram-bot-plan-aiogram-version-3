@@ -1,6 +1,6 @@
 import logging
 from aiogram import Router
-from aiogram.types import Update
+from aiogram.types import ErrorEvent
 from aiogram.exceptions import (
     TelegramAPIError,
     TelegramBadRequest,
@@ -15,13 +15,18 @@ router = Router(name="error_handler")
 
 
 @router.errors()
-async def errors_handler(update: Update, exception: Exception):
+async def errors_handler(event: ErrorEvent):
     """
     Exceptions handler. Barcha xatolarni ushlaydi.
+
+    ⚠️ Aiogram 3.x da @router.errors() handleri
+    ErrorEvent obyektini qabul qiladi.
+    Eski usul (update, exception) ISHLAMAYDI!
     """
-    
+    exception = event.exception
+    update = event.update
+
     if isinstance(exception, TelegramBadRequest):
-        # Noto'g'ri so'rovlar
         if "message is not modified" in str(exception):
             logging.exception("Message is not modified")
             return True
@@ -39,37 +44,30 @@ async def errors_handler(update: Update, exception: Exception):
             return True
         logging.exception(f"TelegramBadRequest: {exception}\nUpdate: {update}")
         return True
-    
+
     if isinstance(exception, TelegramForbiddenError):
-        # Bot bloklangan yoki ruxsat yo'q
         logging.exception(f"TelegramForbiddenError: {exception}")
         return True
-    
+
     if isinstance(exception, TelegramNotFound):
-        # Chat yoki xabar topilmadi
         logging.exception(f"TelegramNotFound: {exception}")
         return True
-    
+
     if isinstance(exception, TelegramUnauthorizedError):
-        # Token noto'g'ri
         logging.exception(f"TelegramUnauthorizedError: {exception}")
         return True
-    
+
     if isinstance(exception, TelegramRetryAfter):
-        # Rate limit
         logging.exception(f"TelegramRetryAfter: {exception}\nUpdate: {update}")
         return True
-    
+
     if isinstance(exception, TelegramNetworkError):
-        # Tarmoq xatosi
         logging.exception(f"TelegramNetworkError: {exception}\nUpdate: {update}")
         return True
-    
+
     if isinstance(exception, TelegramAPIError):
-        # Boshqa Telegram API xatolari
         logging.exception(f"TelegramAPIError: {exception}\nUpdate: {update}")
         return True
-    
-    # Boshqa barcha xatolar
+
     logging.exception(f"Update: {update}\nException: {exception}")
     return True

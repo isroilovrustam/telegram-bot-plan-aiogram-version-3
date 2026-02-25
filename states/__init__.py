@@ -1,5 +1,5 @@
 from aiogram.fsm.state import State, StatesGroup
-
+from . import profile
 
 # Misol uchun State
 class UserState(StatesGroup):

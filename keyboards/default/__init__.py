@@ -1,5 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
-
+from . import contact_buttons
 
 def make_keyboard(items: list, row_width: int = 2) -> ReplyKeyboardMarkup:
     """
